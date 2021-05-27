@@ -22,9 +22,9 @@
 # include<stdio.h>
 # include <stdlib.h>
 
-char file1[] = "R2_output.txt"; 	//<------ edit this line
+char file1[] = "R3_output.txt"; 	//<------ edit this line
 char file2[] = "my_output.txt";
-int skip[1] = { 8 }; //<---- edit this with lines you want to skip
+int skip[3] = { 15, 18, 35 }; //<---- edit this with lines you want to skip
 int skip_range[2] = { -1, -1 };	//<--- edit this if you want to skip a range
 
 int is_skip(int line_num) {
