@@ -3,7 +3,7 @@
 #include "A5.h"
 
 void test_analyze_file(FILE *fptr);
-//void test_format_file1(FILE *fptr);
+void test_format_file1(FILE *fptr);
 //void test_format_file2(FILE *fptr);
 //void test_get_city_details(FILE *fptr);
 //void test_replace_is(FILE *fptr);
@@ -25,7 +25,7 @@ int main() {
 		return 0;
 	}
 	test_analyze_file(destination);
-//	test_format_file1(destination);
+	test_format_file1(destination);
 //	test_format_file2(destination);
 //	test_get_city_details(destination);
 //	test_replace_is(destination);

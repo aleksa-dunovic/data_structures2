@@ -83,7 +83,57 @@ void analyze_file(const char *filename, const char *filename2) {
 
 //---------------------- Task 2 ---------------------------------
 void format_file1(const char *in_file, const char *out_file) {
-//your code here
+	char c;
+	int count = 0;
+	int check = 0;
+
+	FILE *f1;
+	// Open file
+	f1 = fopen(in_file, "r");
+	if (f1 == NULL) {
+		FILE *f2 = NULL;
+		f2 = fopen(out_file, "w");
+
+		fprintf(f2, "Error(format_file1): Could not open file %s\n", in_file);
+		fclose(f2);
+		return;
+	}
+
+	FILE *f2 = NULL;
+	f2 = fopen(out_file, "w");
+	if (f2 == NULL) {
+		printf("Error(format_file1): Could not open file %s\n", in_file);
+		return;
+	}
+
+	fscanf(f1, "%c", &c);
+
+	while (!feof(f1)) {
+		if (c == ' ')
+			count++;
+		if (c == '\n') {
+			if (check == 0) {
+				fprintf(f2, " ");
+				count++;
+				check = 1;
+			} else {
+				check = 0;
+			}
+		}
+		if (c != '\n') {
+			if (count == 4) {
+				fprintf(f2, "%c\n", c);
+				count = 0;
+			} else
+				fprintf(f2, "%c", c);
+		}
+
+		fscanf(f1, "%c", &c);
+	}
+
+	fclose(f1);
+	fclose(f2);
+
 	return;
 }
 
