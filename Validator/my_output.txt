@@ -1,94 +1,35 @@
+Start: Testing solve2
+w =       5         x =       4         
+y =       10.00     z =       2.5000    
+r =       2083.7888   
+
+w =       0         x =       20        
+y =       6.71      z =       70.3300   
+r =       6371451.0000
+End: Testing solve2
 ------------------------------
-Start testing: analyze_file:
+Start: Testing rand_int
 
-Analyzing file cIntro.txt:
-#Paragraphs = 5
-#lines = 9
-#Words = 38
-#Characters = 234
-Alpha = 227
-Numerical = 0
-Other = 7
+Testing mode '1':int_rand(2,10,'1') --> 2
+int_rand(5,7,'1') --> 0
 
-Analyzing file chistory.txt:
-#Paragraphs = 3
-#lines = 18
-#Words = 150
-#Characters = 895
-Alpha = 860
-Numerical = 12
-Other = 23
+Testing mode '2':int_rand(2,10,'2') --> 2
+int_rand(5,7,'2') --> 6
 
-Error(analyze_file): Could not open file nothing.txt
+Testing mode 'i':int_rand(2,10,'i') --> 3
+int_rand(5,7,'i') --> 5
 
-End Testing: analzye_file
+Testing mode 'x':int_rand(2,10,'x') --> 4
+int_rand(5,7,'x') --> 6
+
+Testing mode 'L':int_rand(2,10,'L') --> 5
+int_rand(5,7,'L') --> 6
+
+Testing mode 'R':int_rand(2,10,'R') --> 9
+int_rand(5,7,'R') --> 7
+
+Testing mode 'M':int_rand(2,10,'M') --> 30040
+int_rand(5,7,'M') --> 4445
+
+End: Testing rand_int
 ------------------------------
-
-------------------------------
-Start testing: format_file1:
-
-Case 1: formatting cIntro.txt:
-
-C is an imperative 
-procedural language. It was 
-designed to be compiled 
-using a relatively straightforward 
-compiler. It provides low-level 
-access to memory. It 
-provides language constructs that 
-map efficiently to machine 
-instructions. It requires minimal 
-run-time support. requires minimal 
-
-----
-Case 2: formatting chistory.txt:
-
-C is a general-purpose, 
-imperative computer programming language, 
-supporting structured programming, lexical 
-variable scope and recursion, 
-while a static type 
-system prevents many unintended 
-operations. By design, C 
-provides constructs that map 
-efficiently to typical machine 
-instructions, and therefore it 
-has found lasting use 
-in applications that had 
-formerly been coded in 
-assembly language, including operating 
-systems, as well as 
-various application software for 
-computers ranging from supercomputers 
-to embedded systems. C 
-was originally developed by 
-Dennis Ritchie between 1969 
-and 1973 at Bell 
-Labs, and used to 
-re-implement the Unix operating 
-system. It has since 
-become one of the 
-most widely used programming 
-languages of all time, 
-with C compilers from 
-various vendors available for 
-the majority of existing 
-computer architectures and operating 
-systems. C has been 
-standardized by the American 
-National Standards Institute (ANSI) 
-since 1989 (see ANSI 
-C) and subsequently by 
-the International Organization for 
-Standardization (ISO). Organization for 
-
-----
-Case 3: formatting nothing.txt:
-
-Error(format_file1): Could not open file nothing.txt
-
-----
-
-End Testing: format_file1
-------------------------------
-
