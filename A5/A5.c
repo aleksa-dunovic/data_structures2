@@ -24,8 +24,11 @@ void analyze_file(const char *filename, const char *filename2) {
 	// Open file
 	f1 = fopen(filename, "r");
 	if (f1 == NULL) {
-
-		printf("Error(analyze_file): Could not open file %s\n", filename2);
+		FILE *f2 = NULL;
+		f2 = fopen(filename2, "a");
+		fseek(f2, 1, SEEK_END);
+		fprintf(f2, "Error(analyze_file): Could not open file %s\n", filename);
+		fclose(f2);
 		return;
 	}
 
@@ -64,10 +67,7 @@ void analyze_file(const char *filename, const char *filename2) {
 	FILE *f2 = NULL;
 	f2 = fopen(filename2, "a");
 	fseek(f2, 1, SEEK_END);
-	if (f2 == NULL) {
-		printf("Error(analyze_file): Could not open file %s\n", filename2);
-		return;
-	}
+
 	fprintf(f2, "Analyzing file %s:\n", filename);
 	fprintf(f2, "#Paragraphs = %d\n", count[0]);
 	fprintf(f2, "#lines = %d\n", count[1]);

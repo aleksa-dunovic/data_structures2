@@ -16,3 +16,4 @@ Alpha = 860
 Numerical = 12
 Other = 23
 
+Error(analyze_file): Could not open file nothing.txt
