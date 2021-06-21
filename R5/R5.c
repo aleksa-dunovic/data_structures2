@@ -71,7 +71,7 @@ void insert_item(int *array, const int size, int item, int pos) {
 	for (int i = size; i >= pos; i--)
 		array[i + 1] = array[i];
 	array[pos] = item;
-//	printf("HERE: %d , %d\n", array[pos], pos);
+	printf("HERE: %d , %d\n", array[pos], pos);
 	return;
 }
 
