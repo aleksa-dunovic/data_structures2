@@ -17,9 +17,9 @@ Start: Testing insert/remove:
 Before insert/remove
 [0,1,2,3,4,5,6,7,8,9]
 After inserting 100 at position 3:
-[0,1,2,3,4,5,6,7,8,9,-1579628716]
+[0,1,2,100,3,4,5,6,7,8,9]
 After deleting value 8:
-[0,1,2,3,4,5,6,7,9,-1579628716]
+[0,1,2,100,3,4,5,6,7,9]
 
 End: Testing insert/remove
 ------------------------------
