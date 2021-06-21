@@ -19,10 +19,34 @@
  *    	If item is not found, returns NULL pointer.
  */
 int* find_match(int *array, const int size, int value, int **last) {
-	int *first;
-	
-	//your solution here
-	
+
+	int *first = NULL;
+	int *l = array;
+	int found = 0;
+	last = &l;
+	if (!array) { //null array
+		printf("Error(find_match): NULL pointer\n");
+		return first;
+	}
+
+	if (size < 0 || size > MAX) { //invalid size
+		printf("Error(find_match): invalid size\n");
+		return first;
+	}
+
+	for (int i = 0; i < size; i++) {
+		if (*(array + i) == value && found == 0) {
+			first = (array + i);
+			found = 1;
+		}
+		if (*(array + i) == value && found == 1) {
+
+			l = (array + i);
+			last = &l;
+			break;
+		}
+
+	}
 	return first;
 }
 
@@ -44,8 +68,8 @@ int* find_match(int *array, const int size, int value, int **last) {
  *    	7- Print value before last match
  */
 void test_find_match(int *array, const int size, int value) {
-	//Do not change this block
-	//-----------------------------------------
+//Do not change this block
+//-----------------------------------------
 	int *first = NULL, *last = NULL;
 	first = find_match(array, size, value, &last);
 
@@ -53,33 +77,41 @@ void test_find_match(int *array, const int size, int value) {
 		printf("first = NULL and last = NULL\n\n");
 		return;
 	}
-	//-----------------------------------------
+//-----------------------------------------
 
-	//Add your code to print the array
-	
+//Add your code to print the array
+	printf("Looking for %d in the array: {", value);
+	for (int i = 0; i < size; i++) {
+		if (i != size - 1) {
+			printf("%d, ", *(array + i));
+		} else
+			printf("%d", *(array + i));
+	}
+	printf("}\n");
 
-	//Edit the two lines to print the address of the start and end of the array
-	printf("First item in the array starts at memory address: %p\n", ?);
-	printf("Last item in the array starts at memory address: %p\n\n",?);
+//Edit the two lines to print the address of the start and end of the array
+	printf("First item in the array starts at memory address: %p\n", array);
+	printf("Last item in the array starts at memory address: %p\n\n",
+			(array + sizeof(int) * (size - 1)));
 
-	//Edit these two lines
-	printf("The first pointer points to value: %d \n", ?); //edit this line
-	printf("The last pointer points to value: %d\n", ?); //edit this line
+//Edit these two lines
+	printf("The first pointer points to value: %d \n", *first); //edit this line
+	//printf("The last pointer points to value: %d\n", **last); //edit this line
 	printf("\n");
 
-	//Edit these two lines
-	printf("First match is located at memory address: %p\n",?);
-	printf("Last match is located at memory address %p\n", ?);
+//Edit these two lines
+	printf("First match is located at memory address: %p\n", first);
+	printf("Last match is located at memory address %p\n", last);
 	printf("\n");
 
-	//Edit these two lines:
-	printf("Index of first match is %d\n", ?);
-	printf("Index of last match is %d\n", ?);
-	printf("\n");
+////Edit these two lines:
+//	printf("Index of first match is %d\n", indx1);
+//	printf("Index of last match is %d\n", ?);
+//	printf("\n");
 
-	//Edit these two lines:
-	printf("Value after first match is %d\n", ?);
-	printf("Value before last match is %d\n", ?);
+//Edit these two lines:
+	printf("Value after first match is %d\n", *(first + sizeof(int)));
+	printf("Value before last match is %d\n", *(last + sizeof(int)));
 	printf("\n");
 
 	return;
@@ -88,7 +120,8 @@ void test_find_match(int *array, const int size, int value) {
 //Do not edit main function
 int main() {
 	setbuf(stdout, NULL);
-	int nums[MAX] = { 12, 19, 16, 18, 10, 12, 4, 19, 18, 10 }, size = MAX;
+	int nums[MAX] = { 12, 19, 16, 18, 10, 12, 4, 19, 18, 10 }, size =
+	MAX;
 
 	printf("Case 1: Invalid array pointer:\n");
 	test_find_match(NULL, size, 12);
