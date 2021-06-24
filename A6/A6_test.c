@@ -11,10 +11,10 @@ void test_concat_stack();
 int main() {
 	setbuf(stdout, NULL);
 	test_remove_shortest();
-	test_reverse_stack();
-	test_contains_stack();
-	test_resize_stack();
-	test_concat_stack();
+//	test_reverse_stack();
+//	test_contains_stack();
+//	test_resize_stack();
+//	test_concat_stack();
 	return 0;
 }
 void test_remove_shortest() {
