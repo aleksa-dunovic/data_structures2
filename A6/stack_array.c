@@ -101,7 +101,7 @@ Stack* copy_stack(Stack *s) {
 	Stack *s2 = create_stack(s->capacity);
 	int i, size = len_stack(s);
 	Data *array = (Data*) malloc(sizeof(Data) * size);
-	for (i = size - 1; i >= 0; i--)
+	for (i = 0; i < size; i++)
 		array[i] = *pop_stack(s);
 	for (i = size - 1; i >= 0; i--) {
 		push_stack(s, &array[i]);
