@@ -42,7 +42,7 @@ void destroy_process(Process **p) {
 	(*p)->time = 0;
 	(*p)->arrival = 0;
 
-	free(*p);
+//	free(*p);
 	*p = NULL;
 
 }

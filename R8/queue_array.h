@@ -22,16 +22,16 @@ typedef struct {
 
 } Queue;
 
-Queue* create_queue(int stack_capacity);
-int is_empty_queue(Queue *s);
-int len_queue(Queue *s);
-int is_full_queue(Queue *s);
+Queue* create_queue(int capacity);
+int is_empty_queue(Queue *q);
+int len_queue(Queue *q);
+int is_full_queue(Queue *q);
 int insert_queue(Queue *q, Data *d);
 Data* peek_queue(Queue *q);
 Data* remove_queue(Queue *q);
 void destroy_queue(Queue **q);
-void print_queue(Queue *s);
-Data* get_capacity_queue(Queue *q);
+void print_queue(Queue *q);
+int get_capacity_queue(Queue *q);
 
 //Queue* copy_queue(Queue *s);
 

@@ -6,110 +6,138 @@
  * -------------------------
  */
 
-#include "queue_array.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 
-Stack* create_stack(int stack_capacity) {
-	Stack *s = (Stack*) malloc(sizeof(Stack));
-	if (stack_capacity < 1) {
-		fprintf(stderr, "Error(create_stack): invalid capacity, set to 10\n");
-		s->capacity = 10;
+#include "queue_array.h"
+
+void adjust_queue(Queue *q);
+
+Queue* create_queue(int capacity) {
+	Queue *q = (Queue*) malloc(sizeof(Queue));
+	if (capacity < 1) {
+		printf("Error(create_queue): invalid queue capacity, set to 10\n");
+		capacity = 10;
 	}
-	s->capacity = stack_capacity;
-	s->array = (Data*) malloc(sizeof(Data) * (s->capacity));
-	s->top = -1;
-	return s;
+	q->capacity = capacity;
+	q->array = (Data*) malloc(sizeof(Data) * capacity);
+	q->front = -1;
+	q->rear = -1;
+
+	return q;
 }
-void destroy_stack(Stack **s) {
-	assert(s!=NULL);
-	Data *data = NULL;
-	while (!is_empty_stack(*s)) {
-		data = pop_stack(*s);
-		destroy_data(&data);
-	}
-	free((*s)->array);
-	(*s)->array = NULL;
-	(*s)->capacity = 0;
-	(*s)->top = 0;
-	free(*s);
-	*s = NULL;
-	return;
+int is_empty_queue(Queue *q) {
+	assert(q!=NULL);
+	return (len_queue(q) == 0);
 }
-Data* pop_stack(Stack *s) {
-	assert(s!=NULL);
-	Data *d = NULL;
-	if (is_empty_stack(s)) {
-		printf("Error(pop_stack): stack is empty\n");
-		return d;
-	}
-	d = copy_data(&s->array[s->top]);
-	Data *temp = &s->array[s->top];
-	destroy_data(&temp);
-	s->top--;
-	return d;
+
+int len_queue(Queue *q) {
+	assert(q!=NULL);
+	if (q->front == -1)
+		return 0;
+	return q->rear - q->front + 1;
 }
-int push_stack(Stack *s, Data *d) {
-	assert(s!= NULL && d!=NULL);
-	if (is_full_stack(s)) {
-		printf("Error(push_stack): stack is full\n");
+
+int is_full_queue(Queue *q) {
+	assert(q!=NULL);
+	return (len_queue(q) == q->capacity);
+}
+
+int insert_queue(Queue *q, Data *d) {
+	assert(!q && !d);
+	if (is_full_queue(q)) {
+		printf("Error(insert_queue): queue is full\n");
 		return False;
 	}
-	s->top++;
-	s->array[s->top] = *copy_data(d);
+	if (is_empty_queue(q))
+		q->front = 0;
+	else if (q->rear == q->capacity - 1)
+		adjust_queue(q);
+	q->rear++;
+	q->array[q->rear] = *copy_data(d);
 	return True;
+}
+
+void adjust_queue(Queue *q) {
+	assert(!q);
+	int length = len_queue(q), i;
+	for (i = 0; i < length; i++)
+		q->array[i] = q->array[i + q->front];
+	q->front = 0;
+	q->rear = length - 1;
 
 }
-void print_stack(Stack *s) {
-	assert(s!=NULL);
-	printf("Stack Size = %d\n", len_stack(s));
-	if (is_empty_stack(s))
-		printf("<emtpy_stack>\n");
-	for (int i = s->top; i >= 0; i--) {
-		print_data(&s->array[i]);
+
+Data* peek_queue(Queue *q) {
+	assert(q!=NULL);
+	if (is_empty_queue(q)) {
+		printf("Error(peek_queue): Queue is empty\n");
+		return NULL;
+	}
+	return copy_data(&q->array[q->front]);
+}
+Data* remove_queue(Queue *q) {
+	assert(!q);
+	Data *d = NULL;
+	if (is_empty_queue(q)) {
+		printf("Error(remove_queue): queue is empty\n");
+		return d;
+	}
+	d = copy_data(&q->array[q->front]);
+
+	Data *temp = &q->array[q->front];
+	destroy_data(&temp);
+	q->front++;
+
+	if (len_queue(q) == 0) {
+		q->front = -1;
+		q->rear = -1;
+	}
+	return d;
+}
+
+void destroy_queue(Queue **q) {
+	assert(!q);
+	while (!is_empty_queue(*q)) {
+		Data *d = remove_queue(*q);
+		destroy_data(&d);
+	}
+	free((*q)->array);
+	(*q)->array = NULL;
+	(*q)->capacity = 0;
+	(*q)->rear = 0;
+	(*q)->front = 0;
+	free(*q);
+	*q = NULL;
+	return;
+
+}
+void print_queue(Queue *q) {
+	asssert(!q);
+	int i;
+	printf("Capacity = %d, Size = %d, front = %d, rear = %d\n", q->capacity,
+			len_queue(q), q->front, q->rear);
+	if (is_empty_queue(q))
+		printf("<empty_queue>\n");
+	else {
+		int counter = 0;
+		for (i = q->front; i <= q->rear; i++) {
+			print_data(&q->array[i]);
+			if ((counter + 1) % 5 == 0 && counter != len_queue(q) - 1)
+				printf("\n");
+			else
+				printf("\t");
+			counter++;
+
+		}
 		printf("\n");
 	}
 	return;
-
 }
 
-Data* peek_stack(Stack *s) {
-	assert(s!=NULL);
-	if (is_empty_stack(s)) {
-		printf("Error(peek_stack): stack is empty\n");
-		return NULL;
-	}
-	return copy_data(&(s->array[s->top]));
-
+int get_capacity_queue(Queue *q) {
+	assert(q!=NULL);
+	return q->capacity;
 }
-int len_stack(Stack *s) {
-	assert(s!=NULL);
-	return s->top + 1;
-}
-int is_empty_stack(Stack *s) {
-	assert(s!=NULL);
-	return (s->top == -1);
-}
-int is_full_stack(Stack *s) {
-	assert(s!=NULL);
-	return (s->top == s->capacity - 1);
-}
-Stack* copy_stack(Stack *s) {
-	assert(s!=NULL);
-	Stack *s2 = create_stack(s->capacity);
-	int i, size = len_stack(s);
-	Data *array = (Data*) malloc(sizeof(Data) * size);
-	for (i = size - 1; i >= 0; i--)
-		array[i] = *pop_stack(s);
-	for (i = size - 1; i >= 0; i--) {
-		push_stack(s, &array[i]);
-		push_stack(s2, &array[i]);
-
-	}
-	free(array);
-	return s2;
-}
-

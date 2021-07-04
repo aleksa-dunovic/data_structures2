@@ -518,7 +518,7 @@ Capacity = 10, Size = 0, front = -1, rear = -1
 Calling is_empty_pqueue(q): 1
 Calling is_full_pqueue(q):0
 
-Calling d = peek_pqueue(q):	Error(peek_pqueue): pqueue is empty
+Calling d = peek_pqueue(q):	Error(peek_pqueue2): pqueue is empty
 Calling insert_pqueue:
 success = 1
 Calling print_pqueue(q):
