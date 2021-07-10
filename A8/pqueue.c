@@ -410,25 +410,25 @@ void destroy_pqueue(pQueue **q) {
 	return;
 }
 
-int compare_data(Data *d1, Data *d2) {
-	if (d1->time > d2->time)
-		return 1;
-	else if (d1->time < d2->time)
-		return 2;
-	else if (d1->time == d2->time) {
-		if (d1->arrival > d2->arrival)
-			return 1;
-		else if (d1->arrival < d2->arrival)
-			return 2;
-		else if (d1->arrival == d2->arrival) {
-			if (d1->PID > d2->PID)
-				return 1;
-			else if (d1->PID < d2->PID)
-				return 2;
-		}
-	}
-	return 0;
-}
+//int compare_data(Data *d1, Data *d2) {
+//	if (d1->time > d2->time)
+//		return 1;
+//	else if (d1->time < d2->time)
+//		return 2;
+//	else if (d1->time == d2->time) {
+//		if (d1->arrival > d2->arrival)
+//			return 1;
+//		else if (d1->arrival < d2->arrival)
+//			return 2;
+//		else if (d1->arrival == d2->arrival) {
+//			if (d1->PID > d2->PID)
+//				return 1;
+//			else if (d1->PID < d2->PID)
+//				return 2;
+//		}
+//	}
+//	return 0;
+//}
 
 void adjust_queue(pQueue *q) {
 	assert(q!=NULL);

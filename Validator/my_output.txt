@@ -1,174 +1,246 @@
 ------------------------------
-Start: Testing Linear and Binary Search:
+Start: Testing FIFO Scheduler
 
-Searching the array: [19]
-linear_search(19) =    0
-linear_search_r(19) =  0
-binary_search(19) =    0
-binary_search_r(19) =  0
+First File:
+[Timer:0]: Starting FIFO Scheduler
+[Timer:1]: Idle
+[Timer:2]: Idle
+[Timer:3]: Idle
+[Timer:4]: Idle
+Fetching Process: [5](1504910000,7)
+[Timer:5]: [5](1504910000,7)
+[Timer:6]: [5](1504910000,7)
+[Timer:7]: [5](1504910000,7)
+[Timer:8]: [5](1504910000,7)
+[Timer:9]: [5](1504910000,7)
+[Timer:10]: [5](1504910000,7)
+[Timer:11]: [5](1504910000,7)
+Fetching Process: [6](1240510001,6)
+[Timer:12]: [6](1240510001,6)
+[Timer:13]: [6](1240510001,6)
+[Timer:14]: [6](1240510001,6)
+[Timer:15]: [6](1240510001,6)
+[Timer:16]: [6](1240510001,6)
+[Timer:17]: [6](1240510001,6)
+Fetching Process: [7](1474110002,5)
+[Timer:18]: [7](1474110002,5)
+[Timer:19]: [7](1474110002,5)
+[Timer:20]: [7](1474110002,5)
+[Timer:21]: [7](1474110002,5)
+[Timer:22]: [7](1474110002,5)
+Fetching Process: [10](1031810003,3)
+[Timer:23]: [10](1031810003,3)
+[Timer:24]: [10](1031810003,3)
+[Timer:25]: [10](1031810003,3)
+Fetching Process: [17](1958910004,4)
+[Timer:26]: [17](1958910004,4)
+[Timer:27]: [17](1958910004,4)
+[Timer:28]: [17](1958910004,4)
+[Timer:29]: [17](1958910004,4)
+Fetching Process: [18](1577910005,4)
+[Timer:30]: [18](1577910005,4)
+[Timer:31]: [18](1577910005,4)
+[Timer:32]: [18](1577910005,4)
+[Timer:33]: [18](1577910005,4)
+Fetching Process: [21](1241010019,1)
+[Timer:34]: [21](1241010019,1)
+Fetching Process: [26](1632510006,7)
+[Timer:35]: [26](1632510006,7)
+[Timer:36]: [26](1632510006,7)
+[Timer:37]: [26](1632510006,7)
+[Timer:38]: [26](1632510006,7)
+[Timer:39]: [26](1632510006,7)
+[Timer:40]: [26](1632510006,7)
+[Timer:41]: [26](1632510006,7)
+Fetching Process: [33](1246410007,5)
+[Timer:42]: [33](1246410007,5)
+[Timer:43]: [33](1246410007,5)
+[Timer:44]: [33](1246410007,5)
+[Timer:45]: [33](1246410007,5)
+[Timer:46]: [33](1246410007,5)
+Fetching Process: [39](1391110008,8)
+[Timer:47]: [39](1391110008,8)
+[Timer:48]: [39](1391110008,8)
+[Timer:49]: [39](1391110008,8)
+[Timer:50]: [39](1391110008,8)
+[Timer:51]: [39](1391110008,8)
+[Timer:52]: [39](1391110008,8)
+[Timer:53]: [39](1391110008,8)
+[Timer:54]: [39](1391110008,8)
+Fetching Process: [40](1644310009,4)
+[Timer:55]: [40](1644310009,4)
+[Timer:56]: [40](1644310009,4)
+[Timer:57]: [40](1644310009,4)
+[Timer:58]: [40](1644310009,4)
+Fetching Process: [47](1193510010,5)
+[Timer:59]: [47](1193510010,5)
+[Timer:60]: [47](1193510010,5)
+[Timer:61]: [47](1193510010,5)
+[Timer:62]: [47](1193510010,5)
+[Timer:63]: [47](1193510010,5)
+Fetching Process: [48](1223210011,6)
+[Timer:64]: [48](1223210011,6)
+[Timer:65]: [48](1223210011,6)
+[Timer:66]: [48](1223210011,6)
+[Timer:67]: [48](1223210011,6)
+[Timer:68]: [48](1223210011,6)
+[Timer:69]: [48](1223210011,6)
+Fetching Process: [50](1510510012,2)
+[Timer:70]: [50](1510510012,2)
+[Timer:71]: [50](1510510012,2)
+Fetching Process: [57](1174910013,2)
+[Timer:72]: [57](1174910013,2)
+[Timer:73]: [57](1174910013,2)
+Fetching Process: [58](1154410014,7)
+[Timer:74]: [58](1154410014,7)
+[Timer:75]: [58](1154410014,7)
+[Timer:76]: [58](1154410014,7)
+[Timer:77]: [58](1154410014,7)
+[Timer:78]: [58](1154410014,7)
+[Timer:79]: [58](1154410014,7)
+[Timer:80]: [58](1154410014,7)
+Fetching Process: [64](1823410015,8)
+[Timer:81]: [64](1823410015,8)
+[Timer:82]: [64](1823410015,8)
+[Timer:83]: [64](1823410015,8)
+[Timer:84]: [64](1823410015,8)
+[Timer:85]: [64](1823410015,8)
+[Timer:86]: [64](1823410015,8)
+[Timer:87]: [64](1823410015,8)
+[Timer:88]: [64](1823410015,8)
+Fetching Process: [65](1208510016,3)
+[Timer:89]: [65](1208510016,3)
+[Timer:90]: [65](1208510016,3)
+[Timer:91]: [65](1208510016,3)
+Fetching Process: [69](1249510017,5)
+[Timer:92]: [69](1249510017,5)
+[Timer:93]: [69](1249510017,5)
+[Timer:94]: [69](1249510017,5)
+[Timer:95]: [69](1249510017,5)
+[Timer:96]: [69](1249510017,5)
+[Timer:97]: Idle
+[Timer:98]: Idle
+Fetching Process: [99](1322410018,4)
+[Timer:99]: [99](1322410018,4)
+[Timer:100]: [99](1322410018,4)
+[Timer:101]: [99](1322410018,4)
+[Timer:102]: [99](1322410018,4)
+[Timer:103]: Closing FIFO Scheduler
 
-linear_search(37) =   -1
-linear_search_r(37) = -1
-binary_search(37) =   -1
-binary_search_r(37) = -1
+Second File:
+[Timer:0]: Starting FIFO Scheduler
+[Timer:1]: Idle
+Fetching Process: [2](1575910000,2)
+[Timer:2]: [2](1575910000,2)
+[Timer:3]: [2](1575910000,2)
+[Timer:4]: Idle
+Fetching Process: [5](1379410001,2)
+[Timer:5]: [5](1379410001,2)
+[Timer:6]: [5](1379410001,2)
+[Timer:7]: Idle
+[Timer:8]: Idle
+Fetching Process: [9](1082710002,4)
+[Timer:9]: [9](1082710002,4)
+[Timer:10]: [9](1082710002,4)
+[Timer:11]: [9](1082710002,4)
+[Timer:12]: [9](1082710002,4)
+Fetching Process: [10](1450910003,1)
+[Timer:13]: [10](1450910003,1)
+Fetching Process: [11](1091110004,4)
+[Timer:14]: [11](1091110004,4)
+[Timer:15]: [11](1091110004,4)
+[Timer:16]: [11](1091110004,4)
+[Timer:17]: [11](1091110004,4)
+Fetching Process: [13](1289010005,2)
+[Timer:18]: [13](1289010005,2)
+[Timer:19]: [13](1289010005,2)
+Fetching Process: [17](1277110006,3)
+[Timer:20]: [17](1277110006,3)
+[Timer:21]: [17](1277110006,3)
+[Timer:22]: [17](1277110006,3)
+Fetching Process: [18](1745910007,1)
+[Timer:23]: [18](1745910007,1)
+Fetching Process: [19](1805010008,6)
+[Timer:24]: [19](1805010008,6)
+[Timer:25]: [19](1805010008,6)
+[Timer:26]: [19](1805010008,6)
+[Timer:27]: [19](1805010008,6)
+[Timer:28]: [19](1805010008,6)
+[Timer:29]: [19](1805010008,6)
+Fetching Process: [22](1769610009,7)
+[Timer:30]: [22](1769610009,7)
+[Timer:31]: [22](1769610009,7)
+[Timer:32]: [22](1769610009,7)
+[Timer:33]: [22](1769610009,7)
+[Timer:34]: [22](1769610009,7)
+[Timer:35]: [22](1769610009,7)
+[Timer:36]: [22](1769610009,7)
+Fetching Process: [23](1286810010,5)
+[Timer:37]: [23](1286810010,5)
+[Timer:38]: [23](1286810010,5)
+[Timer:39]: [23](1286810010,5)
+[Timer:40]: [23](1286810010,5)
+[Timer:41]: [23](1286810010,5)
+Fetching Process: [25](1070210011,7)
+[Timer:42]: [25](1070210011,7)
+[Timer:43]: [25](1070210011,7)
+[Timer:44]: [25](1070210011,7)
+[Timer:45]: [25](1070210011,7)
+[Timer:46]: [25](1070210011,7)
+[Timer:47]: [25](1070210011,7)
+[Timer:48]: [25](1070210011,7)
+Fetching Process: [26](1170310012,8)
+[Timer:49]: [26](1170310012,8)
+[Timer:50]: [26](1170310012,8)
+[Timer:51]: [26](1170310012,8)
+[Timer:52]: [26](1170310012,8)
+[Timer:53]: [26](1170310012,8)
+[Timer:54]: [26](1170310012,8)
+[Timer:55]: [26](1170310012,8)
+[Timer:56]: [26](1170310012,8)
+Fetching Process: [30](1768910013,2)
+[Timer:57]: [30](1768910013,2)
+[Timer:58]: [30](1768910013,2)
+Fetching Process: [34](1287810014,8)
+[Timer:59]: [34](1287810014,8)
+[Timer:60]: [34](1287810014,8)
+[Timer:61]: [34](1287810014,8)
+[Timer:62]: [34](1287810014,8)
+[Timer:63]: [34](1287810014,8)
+[Timer:64]: [34](1287810014,8)
+[Timer:65]: [34](1287810014,8)
+[Timer:66]: [34](1287810014,8)
+Fetching Process: [37](1612310015,3)
+[Timer:67]: [37](1612310015,3)
+[Timer:68]: [37](1612310015,3)
+[Timer:69]: [37](1612310015,3)
+Fetching Process: [40](1162710016,3)
+[Timer:70]: [40](1162710016,3)
+[Timer:71]: [40](1162710016,3)
+[Timer:72]: [40](1162710016,3)
+Fetching Process: [42](1975910017,8)
+[Timer:73]: [42](1975910017,8)
+[Timer:74]: [42](1975910017,8)
+[Timer:75]: [42](1975910017,8)
+[Timer:76]: [42](1975910017,8)
+[Timer:77]: [42](1975910017,8)
+[Timer:78]: [42](1975910017,8)
+[Timer:79]: [42](1975910017,8)
+[Timer:80]: [42](1975910017,8)
+Fetching Process: [44](1927910018,5)
+[Timer:81]: [44](1927910018,5)
+[Timer:82]: [44](1927910018,5)
+[Timer:83]: [44](1927910018,5)
+[Timer:84]: [44](1927910018,5)
+[Timer:85]: [44](1927910018,5)
+Fetching Process: [48](1169510019,3)
+[Timer:86]: [48](1169510019,3)
+[Timer:87]: [48](1169510019,3)
+[Timer:88]: [48](1169510019,3)
+[Timer:89]: Closing FIFO Scheduler
 
-linear_search(21) =   -1
-linear_search_r(21) = -1
-binary_search(21) =   -1
-binary_search_r(21) = -1
-
-linear_search(69) =   -1
-linear_search_r(69) = -1
-binary_search(69) =   -1
-binary_search_r(69) = -1
-
-linear_search(54) =   -1
-linear_search_r(54) = -1
-binary_search(54) =   -1
-binary_search_r(54) = -1
-
-linear_search(51) =   -1
-linear_search_r(51) = -1
-binary_search(51) =   -1
-binary_search_r(51) = -1
-
-Searching the array: [19,21,37,54,69]
-linear_search(19) =    0
-linear_search_r(19) =  0
-binary_search(19) =    0
-binary_search_r(19) =  0
-
-linear_search(37) =    2
-linear_search_r(37) =  2
-binary_search(37) =    2
-binary_search_r(37) =  2
-
-linear_search(21) =    1
-linear_search_r(21) =  1
-binary_search(21) =    1
-binary_search_r(21) =  1
-
-linear_search(69) =    4
-linear_search_r(69) =  4
-binary_search(69) =    4
-binary_search_r(69) =  4
-
-linear_search(54) =    3
-linear_search_r(54) =  3
-binary_search(54) =    3
-binary_search_r(54) =  3
-
-linear_search(51) =   -1
-linear_search_r(51) = -1
-binary_search(51) =   -1
-binary_search_r(51) = -1
-
-Searching the array: [19,21,21,37,54,69,77,82,91,97]
-linear_search(19) =    0
-linear_search_r(19) =  0
-binary_search(19) =    0
-binary_search_r(19) =  0
-
-linear_search(37) =    3
-linear_search_r(37) =  3
-binary_search(37) =    3
-binary_search_r(37) =  3
-
-linear_search(21) =    1
-linear_search_r(21) =  1
-binary_search(21) =    1
-binary_search_r(21) =  1
-
-linear_search(69) =    5
-linear_search_r(69) =  5
-binary_search(69) =    5
-binary_search_r(69) =  5
-
-linear_search(54) =    4
-linear_search_r(54) =  4
-binary_search(54) =    4
-binary_search_r(54) =  4
-
-linear_search(51) =   -1
-linear_search_r(51) = -1
-binary_search(51) =   -1
-binary_search_r(51) = -1
-
-End: Testing Linear and Binary Search
 ------------------------------
+End of Testing FIFO Scheduler
 
-------------------------------
-Start: Testing Bubble Sort:
-
-Sorting array 0:
-[19]
-
-Sorting array 1:
-[19,21,33,54,69]
-
-Sorting array 2:
-[15,21,37,41,51,54,68,69,77,97]
-
-End: Testing Bubble Sort
-------------------------------
-
-------------------------------
-Start: Testing Insertion Sort:
-
-Sorting array 0:
-[19]
-
-Sorting array 1:
-[19,21,33,54,69]
-
-Sorting array 2:
-[15,21,37,41,51,54,68,69,77,97]
-
-End: Testing Insertion Sort
-------------------------------
-
-------------------------------
-Start: Testing Selection Sort:
-
-Sorting array 0:
-[19]
-
-Sorting array 1:
-[19,21,33,54,69]
-
-Sorting array 2:
-[15,21,37,41,51,54,68,69,77,97]
-
-End: Testing Selection Sort
-------------------------------
-
-------------------------------
-Start: Testing Quick Sort:
-
-Sorting array 0:
-[19]
-
-Sorting array 1:
-[19,21,33,54,69]
-
-Sorting array 2:
-[15,21,37,41,51,54,68,69,77,97]
-
-End: Testing Quick Sort
-------------------------------
-
-------------------------------
-Start: Testing Merge Sort:
-
-Sorting array 0:
-[19]
-
-Sorting array 1:
-[19,21,33,54,69]
-
-Sorting array 2:
-[15,21,37,41,51,54,68,69,77,97]
-
-End: Testing Merge Sort
-------------------------------
-
+Testing for LIFO Scheduler:
+Assertion failed: p1!=NULL, file ..\process.c, line 59

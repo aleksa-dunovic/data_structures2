@@ -10,8 +10,8 @@ int read_processes(char*, Data*);
 int main() {
 	setbuf(stdout, NULL);
 	test_FIFO();
-	test_SJF();
-	test_RR();
+//	test_SJF();
+//	test_RR();
 	printf("Testing for LIFO Scheduler:\n");
 	schedule("LIFO", NULL, 2);
 	return 0;
