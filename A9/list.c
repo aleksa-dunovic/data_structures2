@@ -1,9 +1,9 @@
 /*
- * ---------------------------------
- * Student Name:
- * Student ID:
- * Student Email:
- * ---------------------------------
+ * -------------------------
+ * Student Name: Aleksa Dunovic
+ * Student ID: 140271610
+ * Student email: duno1610@mylaurier.ca
+ * -------------------------
  */
 
 # include <stdio.h>
@@ -11,6 +11,9 @@
 # include <assert.h>
 # include "list.h"
 
+Node* get_node(List *l, int indx);
+int search(List *list, Data *d);
+int is_equal_data(Data *d1, Data *d2);
 /**
  * ------------------------------------------------------------
  * Parameters: 	d - a data item (Data*)
@@ -72,7 +75,7 @@ Node* copy_node(Node *n) {
  */
 void destroy_node(Node **n) {
 	assert(n && *n);
-	destroy_data(&(*n)->data);
+//	destroy_data(&(*n)->data);
 	(*n)->data = NULL;
 	(*n)->next = NULL;
 	free(*n);
@@ -157,8 +160,9 @@ void append_list(List *list, Data *d) {
  */
 void destroy_list(List **list) {
 	assert(list && *list);
-	while ((*list)->size > 0)
+	while ((*list)->size > 0) {
 		pop_list(*list, 0);
+	}
 	(*list)->head = NULL;
 	(*list)->size = 0;
 	free(*list);
@@ -179,7 +183,37 @@ void destroy_list(List **list) {
  * -------------------------------------------------------------------------
  */
 int insert_list(List *list, Data *d, int index) {
-	return 0;
+	assert(list!= NULL && d !=NULL);
+	//error checking
+	if (index < 0 || (index > list->size && list->size != 0)) {
+		printf("Error(insert_list): index out of range\n");
+		return False;
+	}
+
+	if (list->head == NULL) {						//inserting into empty list
+		Node *new = create_node(d, NULL);
+		list->head = new;
+
+	} else if (index == 0) {						//inserting at head
+		Node *new = create_node(d, list->head);
+		list->head = new;
+
+	} else if (list->size - 1 == index) {		//inserting before last element
+		Node *insertion = get_node(list, index);
+		Node *new = create_node(d, insertion->next);
+		insertion->next = new;
+
+	} else if (list->size == index) {				//appending
+		append_list(list, d);
+		list->size--;		//had to decrement because I will increment later on
+	} else {										//all other cases
+		Node *insertion = get_node(list, index);
+		Node *new = create_node(d, insertion->next);
+		insertion->next = new;
+	}
+	list->size++;
+
+	return True;
 }
 
 /**
@@ -195,7 +229,44 @@ int insert_list(List *list, Data *d, int index) {
  * ------------------------------------------------------------------
  */
 Data* pop_list(List *list, int index) {
-	return NULL;
+	assert(list!=NULL);
+	//error checking
+	if (list->size == 0) {
+		printf("Error(pop_list): list is empty\n");
+		return False;
+	}
+
+	if (index < 0 || index >= list->size) {
+		printf("Error(pop_list): index out of range\n");
+		return False;
+	}
+
+	Data *d;
+	if (list->size == 1) {						//list with only one item
+		d = copy_data(list->head->data);
+		destroy_node(&list->head);
+		list->head = NULL;
+
+	} else if (index == 0) {					//popping head
+		d = copy_data(list->head->data);
+		Node *new_head = list->head->next;
+		destroy_node(&list->head);
+		list->head = new_head;
+	} else if (index == list->size - 1) {		//popping last item
+		Node *previous = get_node(list, index);
+		d = copy_data(previous->next->data);
+		destroy_node(&previous->next);
+		previous->next = NULL;
+	} else {									//all other cases
+		Node *previous = get_node(list, index);
+		Node *temp = previous->next->next;
+		d = copy_data(previous->next->data);
+		destroy_node(&previous->next);
+		previous->next = temp;
+	}
+
+	list->size--;
+	return d;
 }
 
 /**
@@ -212,6 +283,56 @@ Data* pop_list(List *list, int index) {
  * ---------------------------------------------------------------------
  */
 void cut_list(List *list, int start, int end) {
+	assert(list!=NULL);
+	//error checking
+	if (list->size == 0) {
+		printf("Error(cut_list): Linked List is empty\n");
+		return;
+	}
+	if (start < 0 || start >= list->size) {
+		printf("Error(cut_list): Invalid start index\n");
+		return;
+	}
+	if (end < 0 || end >= list->size || end < start) {
+		printf("Error(cut_list): Invalid end index\n");
+		return;
+	}
+	Node *remove; //create temp for use later
+
+	if ((end - start + 1) == list->size) { //case where we're removing entire list
+		remove = list->head;
+		list->head = NULL;
+		list->size = 0;
+	} else {										//all other cases
+		Node *a = get_node(list, start); //'a' represents the node before start
+		Node *z = get_node(list, end + 2); //'z' represents the node after end
+
+		if (start == end) {							//removing a single node
+			remove = a->next;
+			a->next = a->next->next;
+			remove->next = NULL;
+
+		} else {									//removing multiple nodes
+			remove = a->next;
+			Node *temp = remove;
+			for (int i = 0; i < (end - start); i++) {
+				temp = temp->next;
+			}
+			temp->next = NULL;
+			a->next = z;
+
+		}
+		list->size = list->size - (end - start + 1);	//update size
+
+		if (start == 0) {	//update head if it was removed
+			list->head = a;
+		}
+	}
+
+	//destroy the removed nodes
+	List *junk = create_list();
+	junk->head = remove;
+	destroy_list(&junk);
 	return;
 }
 
@@ -230,7 +351,39 @@ void cut_list(List *list, int start, int end) {
  * ---------------------------------------------------------------------
  */
 List* sub_list(List *list, int start, int end) {
-	return NULL;
+	assert(list != NULL);
+	//error checking
+	if (list->head == NULL) {
+		printf("Error(sub_list): Linked list is empty\n");
+		return create_list();
+	}
+	if (start < 0 || start >= list->size) {
+		printf("Error(sub_list): Invalid start index\n");
+		return create_list();
+	}
+	if (end < 0 || end >= list->size || end < start) {
+		printf("Error(sub_list): Invalid end index\n");
+		return create_list();
+	}
+	List *linkedList = create_list();
+	if (start == end) { //single item list
+		Node *new_head = copy_node(get_node(list, start + 1));
+		linkedList->head = new_head;
+		linkedList->size = 1;
+		linkedList->head->next = NULL;
+	} else {
+
+		Node *new_head = copy_node(get_node(list, start + 1));
+		linkedList->head = new_head;
+		linkedList->size = end - start + 1;
+		Node *current = linkedList->head;
+		for (int i = 0; i < (end - start); i++) {
+			current->next = copy_node(current->next);
+			current = current->next;
+		}
+		current->next = NULL;
+	}
+	return linkedList;
 }
 
 /**
@@ -245,6 +398,65 @@ List* sub_list(List *list, int start, int end) {
  * ---------------------------------------------------------------------
  */
 void swap_list(List *list, int i, int j) {
+	assert(list != NULL);
+	if (list->size == 0) {
+		printf("Error(swap_list): list is empty\n");
+		return;
+	}
+
+	if (i < 0 || j < 0 || i >= list->size || j >= list->size) {
+		printf("Error (swap_list): Invalid value of i or j\n");
+		return;
+	}
+
+	if (i == j) { //can't swap item with itself
+		return;
+	}
+
+	//create nodes that precede i and j
+	Node *prev1 = NULL;
+	Node *prev2 = NULL;
+
+	if (i != 0)
+		prev1 = get_node(list, i);
+	if (j != 0)
+		prev2 = get_node(list, j);
+
+	//create the nodes that will be swapped
+	Node *node1 = NULL;
+	Node *node2 = NULL;
+	if (i == 0)
+		node1 = list->head;
+	else
+		node1 = prev1->next;
+
+	if (j == 0)
+		node2 = list->head;
+	else
+		node2 = prev2->next;
+
+	//create a temp node to hold a node while swapping
+	Node *temp = NULL;
+
+	//connect prev1 to node2
+	if (prev1 != NULL)
+		prev1->next = node2;
+
+	//connect prev2 to node1
+	if (prev2 != NULL)
+		prev2->next = node1;
+
+	//swap the next nodes of both node1 and node2
+	temp = node1->next;
+	node1->next = node2->next;
+	node2->next = temp;
+
+	//update head if any of the swapped nodes was the head
+	if (i == 0)
+		list->head = node2;
+	else if (j == 0)
+		list->head = node1;
+
 	return;
 }
 
@@ -259,5 +471,56 @@ void swap_list(List *list, int i, int j) {
  * ---------------------------------------------------------------------
  */
 List* intersection_list(List *list1, List *list2) {
-	return NULL;
+	assert(list1 != NULL && list2!= NULL);
+
+	Node *current = list1->head;
+	List *list3 = create_list();
+
+	while (current != NULL) {
+
+		if (search(list2, current->data) >= 0) {
+			if (search(list3, current->data) == -1) {
+				append_list(list3, copy_data(current->data));
+			}
+		}
+		current = current->next;
+
+	}
+	return list3;
+}
+
+Node* get_node(List *l, int indx) {
+	//fetches note at indx -1
+	Node *current = l->head;
+	int counter = 0;
+	while (current == NULL || counter < indx - 1) {
+		current = current->next;
+		counter++;
+	}
+
+	return current;
+}
+
+int search(List *list, Data *d) {
+	//looks for data in given list
+	Node *current = list->head;
+	int index = -1, counter = 0;
+	while (current != NULL) {
+		if (is_equal_data(current->data, d) == 1) {
+			index = counter;
+			break;
+		}
+		counter++;
+		current = current->next;
+	}
+	return index;
+}
+
+int is_equal_data(Data *d1, Data *d2) {
+	//checks whether two data objects are equal
+	if (d1->time == d2->time && d1->arrival == d2->arrival
+			&& d1->PID == d2->PID)
+		return 1;
+	else
+		return 0;
 }
