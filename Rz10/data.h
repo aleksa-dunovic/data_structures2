@@ -13,13 +13,10 @@
 #define True 1
 #define False 0
 
-typedef int Data;
+typedef Process Data;
 
 void print_data(Data *d);
-void print_data_array(Data *array, const int size);
 void destroy_data(Data **d);
-Data* copy_data(Data *d1);
-void swap_data(Data *d1, Data *d2);
-int compare_data(Data *d1, Data *d2);
+Data* copy_data(Data *d);
 
 #endif /* DATA_H_ */
