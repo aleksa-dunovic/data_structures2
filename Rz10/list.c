@@ -38,3 +38,21 @@ Node* copy_node(Node *n) {
 	assert(n);
 	return create_node(n->data, n->next);
 }
+
+void destroy_list(List **list) {
+	assert(list && *list);
+	while ((*list)->size > 0) {
+		pop_list(*list, 0);
+	}
+	(*list)->head = NULL;
+	(*list)->size = 0;
+	free(*list);
+	return;
+}
+
+List* create_list() {
+	List *list = (List*) malloc(sizeof(List));
+	list->head = NULL;
+	list->size = 0;
+	return list;
+}
