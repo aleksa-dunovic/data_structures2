@@ -53,7 +53,7 @@ Node* create_node(Data *d, Node *parent, Node *left, Node *right) {
  * -------------------------------------------------------
  */
 void print_node(Node *n) {
-	if (!n)
+	if (n == NULL)
 		printf("<NULL Node>");
 	else {
 		print_data(n->data);
@@ -201,13 +201,8 @@ Data* peek_heap(Heap *h) {
 Node* find_node_heap(Heap *h, Data *d) {
 	assert(h && d);
 	Node *n;
-	if (h->root->left) {
-		n = find_node_heap_aux(h->root->left, d);
 
-	}
-	if (h->root->right) {
-		n = find_node_heap_aux(h->root->right, d);
-	}
+	n = find_node_heap_aux(h->root, d);
 
 	return n;
 }
@@ -223,16 +218,19 @@ Node* find_node_heap(Heap *h, Data *d) {
  * --------------------------------------------------
  */
 Node* find_node_heap_aux(Node *n, Data *d) {
+	if (!n)
+		return NULL;
+
 	if (compare_data(n->data, d) == 0) {
 		return n;
 	}
-	if (n->left) {
-		find_node_heap_aux(n->left, d);
-	}
-	if (n->right) {
-		find_node_heap_aux(n->right, d);
-	}
-	return NULL;
+
+	Node *node = find_node_heap_aux(n->left, d);
+	if (node != NULL)
+		return node;
+
+	return find_node_heap_aux(n->right, d);
+
 }
 
 //------------------------ A10 Task 4 -------------------------
@@ -265,20 +263,19 @@ void print_heap(Heap *h) {
 
 	Queue *q = create_queue(h->size);
 	Node *current = h->root;
+	insert_queue(q, current->data);
 
-	while (len_queue(q) < h->size) {
+	while (!is_empty_queue(q)) {
+		current = find_node_heap(h, remove_queue(q));
 		if (current->left)
 			insert_queue(q, current->left->data);
 		if (current->right)
 			insert_queue(q, current->right->data);
-		insert_queue(q, current->data);
-		current = find_node_heap(h, remove_queue(q));
-	}
-
-	while (!is_empty_queue(q)) {
-		print_data(remove_queue(q));
+		print_data(current->data);
 		printf(" ");
+
 	}
+	printf("\n");
 	return;
 }
 
@@ -297,8 +294,12 @@ void print_heap(Heap *h) {
  * --------------------------------------------------
  */
 int contains_heap(Heap *h, Data *d) {
-	//your code here
-	return 0;
+	assert(h && d);
+	int found = 0;
+
+	found = contains_heap_aux(h, h->root, d);
+
+	return found;
 }
 
 /**
@@ -314,28 +315,22 @@ int contains_heap(Heap *h, Data *d) {
  * --------------------------------------------------
  */
 int contains_heap_aux(Heap *h, Node *n, Data *d) {
-	//your code here
-	return 0;
+	if (!n)
+		return False;
+
+	if (compare_data(n->data, d) == 0) {
+		return True;
+	}
+	if (compare_data(d, n->data) == 1) {
+		return 0;
+	}
+	int found = contains_heap_aux(h, n->left, d);
+	if (found == True)
+		return True;
+
+	return contains_heap_aux(h, n->right, d);
 }
 //------------------------ A10 Task 6 -------------------------
-
-/**
- * ---------------------------------------------------
- * Parameters:  h - a heap (Heap*)
- * 				start - a node for starting the search, normally the root (Node*)
- * 				node - the node to search for its level (Node*)
- * 				level - keeps track for level so far (int)
- * Returns: 	node_level - level of "node" in the heap (int)
- * Description:	Private helper method. Uses recursion.
- * 				Finds the level of a given node in a heap
- * 				if not found returns -1
- * Asserts:		heap is not NULL
- * --------------------------------------------------
- */
-int find_node_level_heap_aux(Node *start, Node *node, int level) {
-	//your code here
-	return 0;
-}
 
 /**
  * ---------------------------------------------------
@@ -349,8 +344,19 @@ int find_node_level_heap_aux(Node *start, Node *node, int level) {
  * --------------------------------------------------
  */
 int find_node_level_heap(Heap *h, Node *node) {
-	//your code here
-	return 0;
+	assert(h);
+	Node *current = node;
+	Node *previous = NULL;
+	int node_level = 0;
+	while (current) {
+		previous = current;
+		current = current->parent;
+		node_level++;
+	}
+	if (previous == h->root) {
+		return node_level;
+	}
+	return -1;
 }
 
 //------------------------ A10 Task 7 -------------------------
@@ -366,8 +372,13 @@ int find_node_level_heap(Heap *h, Node *node) {
  * --------------------------------------------------
  */
 int is_full_heap_aux(Node *root) {
-	//your code here
-	return 0;
+	if (!root)
+		return True;
+
+	if ((!root->left && root->right) || (root->left && !root->right)) {
+		return False;
+	}
+	return is_full_heap_aux(root->left) && is_full_heap_aux(root->right);
 }
 
 /**
@@ -381,8 +392,10 @@ int is_full_heap_aux(Node *root) {
  * --------------------------------------------------
  */
 int is_full_heap(Heap *h) {
-	//your code here
-	return 0;
+	assert(h);
+	int found = True;
+	found = is_full_heap_aux(h->root);
+	return found;
 }
 
 //------------------------ A10 Task 8 -------------------------
@@ -397,7 +410,7 @@ int is_full_heap(Heap *h) {
  * --------------------------------------------------
  */
 Data* find_max_heap(Heap *h) {
-	//your code here
+//your code here
 	return NULL;
 }
 
@@ -412,7 +425,7 @@ Data* find_max_heap(Heap *h) {
  * --------------------------------------------------
  */
 Data* find_min_heap(Heap *h) {
-	//your code here
+//your code here
 	return NULL;
 }
 

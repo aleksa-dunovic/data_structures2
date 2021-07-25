@@ -25,9 +25,9 @@ int main() {
 	test_heap_basics();
 	test_find_node();
 	test_print_heap();
-//	test_contains_heap();
-//	test_node_level();
-//	test_is_full();
+	test_contains_heap();
+	test_node_level();
+	test_is_full();
 //	test_max_min();
 	return 0;
 }
@@ -159,7 +159,7 @@ void test_find_node() {
 		array[i] = values[i];
 
 	Heap *h = get_heap(8, "max");
-	//print_heap(h);
+	print_heap(h);
 	printf("\n");
 
 	Node *node = NULL;
