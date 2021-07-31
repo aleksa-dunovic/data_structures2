@@ -18,6 +18,8 @@
 Node* find_node_heap_aux(Node *n, Data *d);
 int contains_heap_aux(Heap *h, Node *n, Data *d);
 int is_full_heap_aux(Node *root);
+Node* find_min_heap_aux(Node *node, Node *min);
+Node* find_max_heap_aux(Node *node, Node *max);
 
 //------------------------ A10 Task 1 -------------------------
 /**
@@ -410,8 +412,33 @@ int is_full_heap(Heap *h) {
  * --------------------------------------------------
  */
 Data* find_max_heap(Heap *h) {
-//your code here
-	return NULL;
+	assert(h);
+	if (is_empty_heap(h)) { //empty heap
+		printf("Error(find_max_heap): empty heap\n");
+		return NULL;
+	}
+//	char max[4]
+//	strcpy(max, "max");
+
+	if (strcmp(h->type, "max") == 0) {
+		return copy_data(h->root->data);
+	} else {
+		Node *max = find_max_heap_aux(h->root, h->root);
+		return copy_data(max->data);
+	}
+}
+
+Node* find_max_heap_aux(Node *node, Node *max) {
+	if (!node) {
+		return max;
+	}
+
+	if (compare_data(node->data, max->data) == 1) {
+		max = node;
+	}
+	max = find_max_heap_aux(node->left, max);
+	return find_max_heap_aux(node->right, max);
+
 }
 
 /**
@@ -425,8 +452,33 @@ Data* find_max_heap(Heap *h) {
  * --------------------------------------------------
  */
 Data* find_min_heap(Heap *h) {
-//your code here
-	return NULL;
+	assert(h);
+	if (is_empty_heap(h)) {	//empty heap
+		printf("Error(find_min_heap): empty heap\n");
+		return NULL;
+	}
+
+	if (strcmp(h->type, "min") == 0) {
+		return copy_data(h->root->data);
+	} else {
+
+		Node *min = find_min_heap_aux(h->root, h->root);
+		return copy_data(min->data);
+	}
+
+}
+
+Node* find_min_heap_aux(Node *node, Node *min) {
+	if (!node) {
+		return min;
+	}
+
+	if (compare_data(node->data, min->data) == 2) {
+		min = node;
+	}
+	min = find_min_heap_aux(node->left, min);
+	return find_min_heap_aux(node->right, min);
+
 }
 
 //------------------------ Do not change these -------------------------

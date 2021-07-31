@@ -28,7 +28,7 @@ int main() {
 	test_contains_heap();
 	test_node_level();
 	test_is_full();
-//	test_max_min();
+	test_max_min();
 	return 0;
 }
 
